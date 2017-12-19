@@ -14,7 +14,7 @@ server.connection({
 });
 
 //Connect to db
-server.app.db = mongojs('https://language-challenge.documents.azure.com:443', ['words','score']);
+server.app.db = mongojs('language-challenge:3gOJ3E4cEI5zQslDiKrLtF3bhdVCi6ABf4E21Rs5YfX6wKDK3LzRemttmUK70W89e0F7dzx0KG3nAzBpltCk4Q==@language-challenge.documents.azure.com:10255/?ssl=true&replicaSet=globaldb', ['words','score']);
 
 //Load plugins and start server
 server.register([
