@@ -14,7 +14,7 @@ server.connection({
 });
 
 //Connect to db
-server.app.db = mongojs('localhost:27017/local', ['words','score']);
+server.app.db = mongojs('https://language-challenge.documents.azure.com:443', ['words','score']);
 
 //Load plugins and start server
 server.register([
