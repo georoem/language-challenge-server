@@ -1,5 +1,5 @@
 'use strict';
-process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "production";
 const Hapi = require('hapi');
 const mongojs = require('mongojs');
 const config = require('config');
