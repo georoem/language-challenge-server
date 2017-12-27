@@ -31,7 +31,7 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             db.words.find({
-                wordType: request.params.wordType
+                _wordType: request.params.wordType
             }, (err, doc) => {
 
                 if (err) {
@@ -117,10 +117,10 @@ exports.register = function (server, options, next) {
         config: {
             validate: {
                 payload: {
-                    word : Joi.string().min(1).max(100).required(), 
-                    wordTranslate : Joi.string().min(1).max(100).required(), 
-                    wordType : Joi.string().min(1).max(100).required(), 
-                    level: Joi.string().min(1).max(3).required()
+                    _word : Joi.string().min(1).max(100).required(), 
+                    _wordTranslate : Joi.string().min(1).max(100).required(), 
+                    _wordType : Joi.string().min(1).max(100).required(), 
+                    _level: Joi.string().min(1).max(3).required()
                 }
             }
         }
@@ -152,10 +152,10 @@ exports.register = function (server, options, next) {
             validate: {
                 payload: Joi.object({
                     payload: {
-                        word : Joi.string().min(1).max(100).optional(), 
-                        wordTranslate : Joi.string().min(1).max(100).optional(), 
-                        wordType : Joi.string().min(1).max(100).optional(), 
-                        level: Joi.string().min(1).max(3).optional()
+                        _word : Joi.string().min(1).max(100).optional(), 
+                        _wordTranslate : Joi.string().min(1).max(100).optional(), 
+                        _wordType : Joi.string().min(1).max(100).optional(), 
+                        _level: Joi.string().min(1).max(3).optional()
                     }
                 }).required().min(1)
             }

@@ -1,7 +1,8 @@
 'use strict';
-
+process.env.NODE_ENV = "development";
 const Hapi = require('hapi');
 const mongojs = require('mongojs');
+const config = require('config');
 
 const port = process.env.port || 1337;
 
@@ -14,8 +15,10 @@ server.connection({
 });
 
 //Connect to db
-server.app.db = mongojs('language-challenge:3gOJ3E4cEI5zQslDiKrLtF3bhdVCi6ABf4E21Rs5YfX6wKDK3LzRemttmUK70W89e0F7dzx0KG3nAzBpltCk4Q==@language-challenge.documents.azure.com:10255/?ssl=true&replicaSet=globaldb', ['words','score']);
-// server.app.db = mongojs('localhost:27017/local', ['words','score']);
+let urlDb = config.get('mongo.server.url');
+console.log('Url badabase : '+urlDb);
+server.app.db = mongojs(urlDb, ['words','score','challenge']);
+
 //Load plugins and start server
 server.register([
     require('./routes/words'),

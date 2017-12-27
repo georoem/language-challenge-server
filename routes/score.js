@@ -50,6 +50,29 @@ exports.register = function (server, options, next) {
 
     server.route({
         method: 'GET',
+        path: '/score/challenge/{challengeId}',
+        handler: function (request, reply) {
+
+            db.score.find({
+                _challengeId: request.params.challengeId
+            }).sort({ _totalCorrectAnswers: -1, _totalTime : 1 }, (err, doc) => {
+
+                if (err) {
+                    return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                }
+
+                if (!doc) {
+                    return reply(Boom.notFound());
+                }
+
+                reply(doc);
+            });
+
+        }
+    });
+
+    server.route({
+        method: 'GET',
         path: '/score/{id}',
         handler: function (request, reply) {
 
@@ -97,7 +120,8 @@ exports.register = function (server, options, next) {
                     _totalTime : Joi.number().required(),
                     _level : Joi.string().min(1).max(100).required(),
                     _totalCorrectAnswers : Joi.number().required(),
-                    _totalAnswers : Joi.number().required()
+                    _totalAnswers : Joi.number().required(),
+                    _challengeId : Joi.string().min(1).max(100).required()
                 }
             }
         }
@@ -133,7 +157,8 @@ exports.register = function (server, options, next) {
                         _totalTime : Joi.number().optional(),
                         _level : Joi.string().min(1).max(100).optional(),
                         _totalCorrectAnswers : Joi.number().optional(),
-                        _totalAnswers : Joi.number().optional()
+                        _totalAnswers : Joi.number().optional(),
+                        _challengeId : Joi.string().min(1).max(100).optional()
                     }
                 }).required().min(1)
             }
