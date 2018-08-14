@@ -27,9 +27,31 @@ exports.register = function (server, options, next) {
 
     server.route({
         method: 'GET',
+        path: '/words/wordTypeGroup/{wordType}/{wordGroupId}',
+        handler: function (request, reply) {
+            db.words.find({
+                _wordType: request.params.wordType,
+                _wordGroupId: request.params.wordGroupId
+            }, (err, doc) => {
+
+                if (err) {
+                    return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                }
+
+                if (!doc) {
+                    return reply(Boom.notFound());
+                }
+
+                reply(doc);
+            });
+
+        }
+    });
+
+    server.route({
+        method: 'GET',
         path: '/words/wordType/{wordType}',
         handler: function (request, reply) {
-
             db.words.find({
                 _wordType: request.params.wordType
             }, (err, doc) => {
@@ -56,6 +78,30 @@ exports.register = function (server, options, next) {
             db.words.findOne({
                 _id: request.params.id
             }, (err, doc) => {
+
+                if (err) {
+                    return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                }
+
+                if (!doc) {
+                    return reply(Boom.notFound());
+                }
+
+                reply(doc);
+            });
+
+        }
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/words/distinct/{field}/{type}',
+        handler: function (request, reply) {
+
+            db.words.distinct(request.params.field, {
+                _wordType: request.params.type
+            }
+            , (err, doc) => {
 
                 if (err) {
                     return reply(Boom.wrap(err, 'Internal MongoDB error'));

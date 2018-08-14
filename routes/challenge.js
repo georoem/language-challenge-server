@@ -98,9 +98,35 @@ exports.register = function (server, options, next) {
                     _description: Joi.string().min(1).max(100).required(),
                     _color: Joi.string().min(1).max(10).required(),
                     _icon: Joi.string().min(1).max(50).required(), 
+                    _fixedSteps: Joi.boolean().required(),
+                    _numberSteps: Joi.number().required(),
                     _wordsTypeChallenge: Joi.array().min(1).required()
                 }
             }
+        }
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/challenge/all',
+        handler: function (request, reply) {
+
+            const challenges = request.payload;
+
+            challenges.forEach(element => {
+                //Create an id
+                element._id = uuid.v1();
+                db.challenge.save(element, (err, result) => {
+                    
+                        if (err) {
+                            return reply(Boom.wrap(err, 'Internal MongoDB error'));
+                        }
+        
+                    });
+            });
+
+            reply(challenges);
+            
         }
     });
 
