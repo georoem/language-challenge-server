@@ -15,30 +15,31 @@ var firebase = require("firebase");
 //     messagingSenderId: "*****************"
 //   };
 
+
 //Test Firebase Database
 
-var configCredentials = {
-    databaseURL: `ws://localhost:5000`,
-};
+// var configCredentials = {
+//     databaseURL: `ws://localhost:5000`,
+// };
 
-new FirebaseServer(5000, 'localhost', {
-    challenge:[{
-        "_type": "TRANSLATE_WORD",
-        "_typeTitle": "Translate Word",
-        "_description": "Translate the word in the shortest time",
-        "_color": "#43A047",
-        "_icon": "translate",
-        "_fixedSteps":true,
-        "_numberSteps":10,
-        "_wordsTypeChallenge": [{
-            "_type": "newWord",
-            "_typeTitle": "New Words",
-            "_color": "#43A047",
-            "_icon": "star",
-            "_random": true
-        }]
-    }]
-  });
+// new FirebaseServer(5000, 'localhost', {
+//     challenge:[{
+//         "_type": "TRANSLATE_WORD",
+//         "_typeTitle": "Translate Word",
+//         "_description": "Translate the word in the shortest time",
+//         "_color": "#43A047",
+//         "_icon": "translate",
+//         "_fixedSteps":true,
+//         "_numberSteps":10,
+//         "_wordsTypeChallenge": [{
+//             "_type": "newWord",
+//             "_typeTitle": "New Words",
+//             "_color": "#43A047",
+//             "_icon": "star",
+//             "_random": true
+//         }]
+//     }]
+//   });
 //End Test Firebase Database
 
 firebase.initializeApp(configCredentials);
@@ -62,12 +63,12 @@ server.app.db=firebase.database();
 
 //Load plugins and start server
 server.register([
-   // require('./routes/firebase/words'),
-   // require('./routes/firebase/score'),
+    require('./routes/firebase/words'),
+    require('./routes/firebase/score'),
     require('./routes/firebase/challenge')
-    // require('./routes/mongodb/words'),
-   // require('./routes/mongodb/score'),
-   //require('./routes/mongodb/challenge')
+    //require('./routes/mongodb/words'),
+    //require('./routes/mongodb/score'),
+    //require('./routes/mongodb/challenge')
 ], (err) => {
 
     if (err) {

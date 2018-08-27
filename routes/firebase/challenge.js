@@ -23,7 +23,7 @@ exports.register = function (server, options, next) {
         path: '/challenge/{id}',
         handler: function (request, reply) {
             const id = request.params.id;
-            db.ref('/challenge/'+id).once('value').then(function(snapshot) {
+            db.ref('/challenge').orderByChild("_id").equalTo(id).once('value').then(function(snapshot) {
                 reply(snapshot.val());
             });
         }
@@ -35,6 +35,7 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             const challenge = request.payload;
+            challenge._id = uuid.v1();
             const result = db.ref('/challenge').push(challenge);
             reply(result);
         }
@@ -48,6 +49,7 @@ exports.register = function (server, options, next) {
             const challenges = request.payload;
 
             challenges.forEach(challenge => {
+                challenge._id = uuid.v1();
                 db.ref('/challenge').push(challenge);
             });
 
@@ -85,8 +87,6 @@ function snapshotToArray(snapshot) {
 
     snapshot.forEach(function(childSnapshot) {
         var item = childSnapshot.val();
-        // item.key = childSnapshot.key;
-
         returnArr.push(item);
     });
 
