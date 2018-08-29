@@ -24,7 +24,7 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
             const id = request.params.id;
             db.ref('/challenge').orderByChild("_id").equalTo(id).once('value').then(function(snapshot) {
-                reply(snapshot.val());
+                reply(snapshotToArray(snapshot));
             });
         }
     });
@@ -89,6 +89,10 @@ function snapshotToArray(snapshot) {
         var item = childSnapshot.val();
         returnArr.push(item);
     });
+
+    if(returnArr.length == 1) {
+        return returnArr[0];
+    }
 
     return returnArr;
 };
