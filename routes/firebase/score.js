@@ -15,7 +15,9 @@ exports.register = function (server, options, next) {
 
             db.ref('/score').once('value').then(function(snapshot) {
                
-                filteredScore = sortArrayByField(snapshotToArray(snapshot),"_totalCorrectAnswers", "desc");
+                let resultArray = snapshotToArray(snapshot);
+
+                let filteredScore = sortArrayByField(resultArray,"_totalCorrectAnswers", "desc");
 
                 filteredScore = sortArrayByField(filteredScore,"_totalTime", "asc");
 
@@ -33,7 +35,9 @@ exports.register = function (server, options, next) {
 
             db.ref('/score').orderByChild("_level").equalTo(request.params.level).once('value').then(function(snapshot) {
                 
-                filteredScore = sortArrayByField(snapshotToArray(snapshot),"_totalCorrectAnswers", "desc");
+                let resultArray = snapshotToArray(snapshot);
+
+                let filteredScore = sortArrayByField(resultArray,"_totalCorrectAnswers", "desc");
 
                 filteredScore = sortArrayByField(filteredScore,"_totalTime", "asc");
 
@@ -50,7 +54,9 @@ exports.register = function (server, options, next) {
 
             db.ref('/score').orderByChild("_challengeId").equalTo(request.params.challengeId).once('value').then(function(snapshot) {
                 
-                filteredScore = sortArrayByField(snapshotToArray(snapshot),"_totalCorrectAnswers", "desc");
+                let resultArray = snapshotToArray(snapshot);
+                
+                let filteredScore = sortArrayByField(resultArray,"_totalCorrectAnswers", "desc");
 
                 filteredScore = sortArrayByField(filteredScore,"_totalTime", "asc");
 
