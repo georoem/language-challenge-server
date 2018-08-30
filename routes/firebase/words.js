@@ -24,9 +24,10 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             db.ref('/words').orderByChild("_wordType").equalTo(request.params.wordType).once('value').then(function(snapshot) {
-                filteredWords = snapshotToArray(snapshot).filter(
+            let resultArray = snapshotToArray(snapshot);
+            let filteredWords = resultArray.filter(
                     word => {
-                        return _wordGroupId == request.params.wordGroupId
+                        return word._wordGroupId == request.params.wordGroupId
                 });
                 reply(filteredWords);
             });
