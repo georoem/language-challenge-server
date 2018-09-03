@@ -1,5 +1,5 @@
 'use strict';
-process.env.NODE_ENV = "prod";
+process.env.NODE_ENV = "production";
 const Hapi = require('hapi');
 const mongojs = require('mongojs');
 const FirebaseServer = require('firebase-server');
@@ -44,12 +44,13 @@ var configCredentials = {
 
 firebase.initializeApp(configCredentials);
 
-const port = process.env.port || 1337;
+const port = process.env.port || 5000;
+const host = process.env.host || 'localhost';
 
 // Create a server with a host and port
 const server = new Hapi.Server();
 server.connection({
-    host: 'localhost', 
+    host: host, 
     port: port,
     routes: {cors:true}
 });
