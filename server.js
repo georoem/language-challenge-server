@@ -1,19 +1,19 @@
 'use strict';
-process.env.NODE_ENV = "dev";
+process.env.NODE_ENV = "prod";
 const Hapi = require('hapi');
 const mongojs = require('mongojs');
 const FirebaseServer = require('firebase-server');
 const config = require('config');
 var firebase = require("firebase");
 
-// var configCredentials = {
-//     apiKey: "********************************",
-//     authDomain: "language-challenge.firebaseapp.com",
-//     databaseURL: "https://language-challenge.firebaseio.com",
-//     projectId: "language-challenge",
-//     storageBucket: "language-challenge.appspot.com",
-//     messagingSenderId: "*****************"
-//   };
+var configCredentials = {
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  };
 
 
 //Test Firebase Database
