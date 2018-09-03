@@ -16,5 +16,8 @@
     "joi": "^10.2.2",
     "mongojs": "^2.4.0",
     "node-uuid": "^1.4.7"
+  },
+  "devDependencies": {
+    "firebase-server": "^1.0.0-rc.2"
   }
 }
