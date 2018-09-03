@@ -64,9 +64,9 @@ server.app.db=firebase.database();
 
 //Load plugins and start server
 server.register([
-    require('./routes/firebase/words'),
-    require('./routes/firebase/score'),
-    require('./routes/firebase/challenge')
+    require('./routes/words'),
+    require('./routes/score'),
+    require('./routes/challenge')
     //require('./routes/mongodb/words'),
     //require('./routes/mongodb/score'),
     //require('./routes/mongodb/challenge')
