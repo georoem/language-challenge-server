@@ -1,8 +1,7 @@
 'use strict';
 process.env.NODE_ENV = "production";
 const Hapi = require('hapi');
-const mongojs = require('mongojs');
-const FirebaseServer = require('firebase-server');
+// const FirebaseServer = require('firebase-server');
 const config = require('config');
 var firebase = require("firebase");
 

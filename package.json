@@ -1,5 +1,5 @@
 {
-  "name": "hapi-rest-mongo",
+  "name": "languaje-challenge-server",
   "version": "1.0.0",
   "description": "Language Challenge Server",
   "main": "server.js",
@@ -16,7 +16,6 @@
     "firebase-key": "^2.0.1",
     "hapi": "^16.1.0",
     "joi": "^10.2.2",
-    "mongojs": "^2.4.0",
     "node-uuid": "^1.4.7"
   },
   "devDependencies": {
